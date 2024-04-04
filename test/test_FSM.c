@@ -274,6 +274,16 @@ void test_funcion_generador_evento_timer(void) {
     TEST_ASSERT_EQUAL(TIMEOUT_DEFAULT, TestEvent);
 }
 
+void test_funcion_generador_evento_fin_tabla(void) {
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                      // No hay evento de numeros
+    test_set_TarjetaValida(0);                       // No evento tarjeta
+    test_set_pinValido(0);                           // El pin ingresado es incorrecto
+    TIME_GetTimeStatus_IgnoreAndReturn(false);       // No hay evento de timer
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(FIN_TABLA, TestEvent);
+}
+
 // typedef enum {
 //     LECTURA_TARJETA,
 //     TARJETA_VALIDA,
