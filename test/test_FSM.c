@@ -218,6 +218,12 @@ void test_funcion_generador_evento_RFID(void) {
     eventos TestEvent = get_event();
     TEST_ASSERT_EQUAL(LECTURA_TARJETA, TestEvent);
 }
+void test_funcion_generador_evento_numero_teclado(void) {
+    NumeroPulsado = 0;
+    KEYBOARD_ReadData_CMockExpectAndReturn(1, 5); // Se presiona el numero 5
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(LECTURA_NUMERO_TECLADO, TestEvent);
+}
 
 // typedef enum {
 //     LECTURA_TARJETA,

@@ -62,4 +62,6 @@ extern STATE estado_ingreso_cuarto_numero[];
 extern STATE estado_validando_pin[];
 extern STATE estado_puerta_abierta[];
 
+void test_set_NumeroPulsado(uint8_t value);
+
 #endif /* API_INC_FSM_H_ */

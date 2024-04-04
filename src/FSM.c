@@ -140,3 +140,7 @@ void reset_FSM(void) {
     NumeroPulsado = -1;
     pinValido = 0;
 }
+
+void test_set_NumeroPulsado(uint8_t value) {
+    NumeroPulsado = value;
+}
