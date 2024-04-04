@@ -226,6 +226,13 @@ void test_funcion_generador_evento_numero_teclado(void) {
     TEST_ASSERT_EQUAL(LECTURA_NUMERO_TECLADO, TestEvent);
 }
 
+void test_funcion_generador_evento_tarjeta_valida(void) {
+    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
+
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(LECTURA_NUMERO_TECLADO, TestEvent);
+}
 // typedef enum {
 //     LECTURA_TARJETA,
 //     TARJETA_VALIDA,

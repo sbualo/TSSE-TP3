@@ -144,3 +144,7 @@ void reset_FSM(void) {
 void test_set_NumeroPulsado(char value) {
     NumeroPulsado = (uint8_t)value;
 }
+
+void test_set_TarjetaValida(int value) {
+    tarjetavalida = value;
+}
