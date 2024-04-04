@@ -162,6 +162,15 @@ void test_avance_FSM_de_estado_estado_validando_pin_a_estado_ingreso_primer_nume
     TEST_ASSERT_EQUAL(estado_ingreso_primer_numero, TestState);
 }
 
+void test_avance_FSM_por_timeout_desde_todos_los_estados() {
+
+    TestState = estado_puerta_abierta;
+    LED_OPEN_DOOR_Ignore();
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento la FSM avanza a ingreso_primer_numero
+    TEST_ASSERT_EQUAL(estado_ingreso_primer_numero, TestState);
+}
+
 // #include "unity.h"
 
 // #include "leds.h"
