@@ -41,6 +41,13 @@ void test_validar_avance_FSM_a_estado_validando_tarjeta(void) {
     TEST_ASSERT_EQUAL(estado_validando_tarjeta, TestState);
 }
 
+void test_reset_fsm_a_estado_inicial(void) {
+    TestState = estado_validando_tarjeta;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+}
+
 // #include "unity.h"
 
 // #include "leds.h"
