@@ -151,7 +151,7 @@ void test_avance_FSM_de_estado_estado_ingreso_cuarto_numero_a_estado_validando_p
 void test_avance_FSM_de_estado_estado_validando_pin_a_estado_puerta_abierta(void) {
     TestState = estado_validando_pin;
     TestState = fsm(TestState,
-                    PIN_INVALIDO); // Con este evento la FSM avanza a ingreso_primer_numero
+                    PIN_VALIDO); // Con este evento la FSM avanza a ingreso_primer_numero
     TEST_ASSERT_EQUAL(estado_puerta_abierta, TestState);
 }
 
