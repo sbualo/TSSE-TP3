@@ -8,18 +8,19 @@
 #include "mock_SPI.h"
 #include "FSM.h"
 
+STATE * TestState;
 
 /**
  * @brief Funcion que se ejecuta antes de cada test (nombre especifico de ceedling)
  *
  */
-void setUp(void) {
+// void setUp(void) {
+//    TestState =  FSM_GetInitState();
+// }
 
-}
-
-void test_basic(void) {
-    
-    TEST_ASSERT_EQUAL_UINT16(0x00, 0);
+void test_inicializacion_FSM_puerta_cerrada(void) {
+    TestState = estado_validando_tarjeta;
+    TEST_ASSERT_EQUAL_UINT16(estado_puerta_cerrada, TestState);
 }
 
 
