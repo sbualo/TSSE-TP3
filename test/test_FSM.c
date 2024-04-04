@@ -33,8 +33,11 @@ void test_validar_id_tarjeta_FSM(void) {
 
 void test_validar_avance_FSM_a_estado_validando_tarjeta(void) {
     TestState = FSM_GetInitState();
+    unsigned char tarjeta_leida[5] = "CARD";
+    GetKeyRead_CMockIgnoreAndReturn(1, tarjeta_leida);
+    USERS_DATA_VALIDATE_KEYCARD_CMockExpectAndReturn(1, test_id_tarjeta_valido, 1);
     TestState = fsm(TestState,
-                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+                    LECTURA_TARJETA); // Con este evento TestState debe de quedar en el mismo lugar
     TEST_ASSERT_EQUAL(estado_validando_tarjeta, TestState);
 }
 
