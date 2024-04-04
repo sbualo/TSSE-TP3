@@ -91,7 +91,7 @@ void no_operation(void){
 
 
 void validar_id_tarjeta(void){
-	TIMER_Start(TIMER_TIMEOUT);
+	//TIMER_Start(TIMER_TIMEOUT);
 	if (USERS_DATA_VALIDATE_KEYCARD(GetKeyRead())){
 		tarjetavalida = 1;
 		NumeroPulsado=0; //permito eventos de teclado

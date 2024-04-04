@@ -10,19 +10,27 @@
 
 STATE * TestState;
 
+unsigned char * test_id_tarjeta_valido = "CARD";
+
 /**
  * @brief Funcion que se ejecuta antes de cada test (nombre especifico de ceedling)
  *
  */
 void setUp(void) {
-   TestState =  FSM_GetInitState();
+  
 }
 
 void test_inicializacion_FSM_puerta_cerrada(void) {
-    
+    TestState =  FSM_GetInitState();
     TEST_ASSERT_EQUAL_UINT16(estado_puerta_cerrada, TestState);
 }
 
+void test_validar_id_tarjeta_FSM(void){
+    unsigned char * tarjeta_leida = "ABCD";
+    GetKeyRead_CMockIgnoreAndReturn(1,tarjeta_leida);
+    USERS_DATA_VALIDATE_KEYCARD_CMockExpectAndReturn(1,test_id_tarjeta_valido,1);
+    validar_id_tarjeta();
+}
 
 
 
