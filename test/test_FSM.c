@@ -135,6 +135,26 @@ void test_avance_FSM_de_estado_estado_ingreso_tercer_numero_a_estado_ingreso_cua
     TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_EN_USO, NumeroPulsado);
     TEST_ASSERT_EQUAL(estado_ingreso_cuarto_numero, TestState);
 }
+
+void test_avance_FSM_de_estado_estado_ingreso_cuarto_numero_a_estado_validando_pin(void) {
+    TestState = estado_ingreso_cuarto_numero;
+    uint8_t NumeroPulsado = 0;
+    USERS_DATA_COLLECT_FOURTH_NUMBER_CMockExpect(1, &NumeroPulsado);
+
+    USERS_DATA_VALIDATE_PIN_CMockExpectAndReturn(
+        1, true); // Se asume siempre un pin válido aunque no afeca este test
+    TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
+    TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_EN_USO, NumeroPulsado);
+    TEST_ASSERT_EQUAL(estado_validando_pin, TestState);
+}
+
+void test_avance_FSM_de_estado_estado_validando_pin_a_estado_puerta_abierta(void) {
+    TestState = estado_validando_pin;
+    TestState = fsm(TestState,
+                    PIN_INVALIDO); // Con este evento la FSM avanza a ingreso_primer_numero
+    TEST_ASSERT_EQUAL(estado_puerta_abierta, TestState);
+}
+
 // #include "unity.h"
 
 // #include "leds.h"
