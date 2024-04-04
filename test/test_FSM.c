@@ -41,6 +41,12 @@ void test_validar_avance_FSM_a_estado_validando_tarjeta(void) {
     TEST_ASSERT_EQUAL(estado_validando_tarjeta, TestState);
 }
 
+void test_lectura_tarjeta_invalida_en_avance_FSM_a_estado_validando_tarjeta(void) {
+    TestState = estado_validando_tarjeta;
+    TestState = fsm(TestState, TARJETA_INVALIDA);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+}
+
 void test_reset_fsm_a_estado_inicial(void) {
     TestState = estado_validando_tarjeta;
     TestState = fsm(TestState,
@@ -89,6 +95,17 @@ void test_reset_fsm_desde_todos_los_estados_hacia_estado_inicial(void) {
                     TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
     TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
 }
+
+// void test__avance_FSM_de_estado_validando_tarjeta_a_estado_ingreso_primer_numero(void) {
+//     TestState = FSM_GetInitState();
+//     unsigned char tarjeta_leida[5] = "CARD";
+//     GetKeyRead_CMockIgnoreAndReturn(1, tarjeta_leida);
+//     USERS_DATA_VALIDATE_KEYCARD_CMockExpectAndReturn(1, test_id_tarjeta_valido, 1);
+//     TestState = fsm(TestState,
+//                     TARJETA_VALIDA); // Con este evento TestState debe de quedar en el mismo
+//                     lugar
+//     TEST_ASSERT_EQUAL(estado_ingreso_primer_numero, TestState);
+// }
 
 // #include "unity.h"
 
