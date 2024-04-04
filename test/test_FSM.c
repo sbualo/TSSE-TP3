@@ -33,8 +33,8 @@ void test_validar_id_tarjeta_FSM(void) {
 
 void test_validar_avance_FSM_a_estado_validando_tarjeta(void) {
     TestState = FSM_GetInitState();
-    // TestState = fsm(TestState,TIMEOUT_DEFAULT); //Con este evento TestState debe de quedar en el
-    // mismo lugar
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
     TEST_ASSERT_EQUAL(estado_validando_tarjeta, TestState);
 }
 
