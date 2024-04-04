@@ -48,6 +48,48 @@ void test_reset_fsm_a_estado_inicial(void) {
     TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
 }
 
+void test_reset_fsm_desde_todos_los_estados_hacia_estado_inicial(void) {
+    TestState = estado_puerta_cerrada;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_validando_tarjeta;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_primer_numero;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_segundo_numero;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_tercer_numero;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_cuarto_numero;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_validando_pin;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+    LED_OPEN_DOOR_CMockIgnore();
+    TestState = estado_puerta_abierta;
+    TestState = fsm(TestState,
+                    TIMEOUT_DEFAULT); // Con este evento TestState debe de quedar en el mismo lugar
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+}
+
 // #include "unity.h"
 
 // #include "leds.h"
