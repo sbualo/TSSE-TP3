@@ -23,6 +23,8 @@ void setUp(void) {
     TIMER_Start_CMockIgnore();
     LED_KeyboardPress_Ignore(); // Se ignora la funcion que prende los leds
     LED_Card_Blink_Ignore();    // Se ignora la funcion que parpadea leds cuando se lee una tarjeta
+    LED_Wrong_Pin_Blink_Ignore(); // Se ignora la funcion que parpadea leds cuando se ingresa pin
+                                  // incorrecto
 }
 
 void test_inicializacion_FSM_puerta_cerrada(void) {
@@ -242,6 +244,25 @@ void test_funcion_generador_evento_tarjeta_invalida(void) {
     eventos TestEvent = get_event();
     TEST_ASSERT_EQUAL(TARJETA_INVALIDA, TestEvent);
 }
+
+void test_funcion_generador_evento_pin_valido(void) {
+    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
+    test_set_TarjetaValida(0);                               // No evento tarjeta
+    test_set_pinValido(1);                                   // El pin ingresado es correcto
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(PIN_VALIDO, TestEvent);
+}
+
+void test_funcion_generador_evento_pin_invalida(void) {
+    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
+    test_set_TarjetaValida(0);                               // No evento tarjeta
+    test_set_pinValido(-1);                                  // El pin ingresado es incorrecto
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(PIN_INVALIDO, TestEvent);
+}
+
 // typedef enum {
 //     LECTURA_TARJETA,
 //     TARJETA_VALIDA,
