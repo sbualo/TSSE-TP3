@@ -12,30 +12,29 @@
 
 /*Listado de Eventos*/
 typedef enum {
-  LECTURA_TARJETA,
-  TARJETA_VALIDA,
-  TARJETA_INVALIDA,
-  LECTURA_NUMERO_TECLADO,
-  PIN_VALIDO,
-  PIN_INVALIDO,
-  TIMEOUT_DEFAULT,
-  TIMEOUT_PUERTA_ABIERTA,
-  FIN_TABLA
+    LECTURA_TARJETA,
+    TARJETA_VALIDA,
+    TARJETA_INVALIDA,
+    LECTURA_NUMERO_TECLADO,
+    PIN_VALIDO,
+    PIN_INVALIDO,
+    TIMEOUT_DEFAULT,
+    TIMEOUT_PUERTA_ABIERTA,
+    FIN_TABLA
 } eventos;
 
 typedef struct state_diagram_edge STATE;
 
+struct state_diagram_edge {
 
-struct state_diagram_edge{
-
-	eventos evento;
-	STATE * proximo_estado;
-	void(*p_rutina_accion)(void);
+    eventos evento;
+    STATE * proximo_estado;
+    void (*p_rutina_accion)(void);
 };
 
 /*Interprete de la maquina de estados*/
-STATE* fsm( STATE *p_tabla_estado , eventos evento_actual);
-STATE* FSM_GetInitState(void);
+STATE * fsm(STATE * p_tabla_estado, eventos evento_actual);
+STATE * FSM_GetInitState(void);
 
 /*Generador de eventos*/
 
@@ -63,6 +62,5 @@ extern STATE estado_ingreso_tercer_numero[];
 extern STATE estado_ingreso_cuarto_numero[];
 extern STATE estado_validando_pin[];
 extern STATE estado_puerta_abierta[];
-
 
 #endif /* API_INC_FSM_H_ */

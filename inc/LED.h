@@ -9,7 +9,7 @@
 #define API_INC_LED_H_
 #include "main.h"
 
-#define TURN_LED_ON GPIO_PIN_SET
+#define TURN_LED_ON  GPIO_PIN_SET
 #define TURN_LED_OFF GPIO_PIN_RESET
 
 void LED_Init(void);

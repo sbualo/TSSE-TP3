@@ -15,11 +15,10 @@ typedef uint8_t PIN[4];
 
 #define MAX_USERS 10
 
-
 typedef struct {
-	KeyCard UserKeyCard;
-	PIN UserPin;
-}user;
+    KeyCard UserKeyCard;
+    PIN UserPin;
+} user;
 
 void USERS_DATA_INIT(void);
 bool USERS_DATA_VALIDATE_KEYCARD(uint8_t * KeyCardReaded);
