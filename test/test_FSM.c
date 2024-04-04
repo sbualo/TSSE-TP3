@@ -234,6 +234,14 @@ void test_funcion_generador_evento_tarjeta_valida(void) {
     eventos TestEvent = get_event();
     TEST_ASSERT_EQUAL(TARJETA_VALIDA, TestEvent);
 }
+
+void test_funcion_generador_evento_tarjeta_invalida(void) {
+    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
+    test_set_TarjetaValida(-1);                              // Lectura tarjeta inválida
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(TARJETA_INVALIDA, TestEvent);
+}
 // typedef enum {
 //     LECTURA_TARJETA,
 //     TARJETA_VALIDA,
