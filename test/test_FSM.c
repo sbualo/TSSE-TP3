@@ -104,6 +104,12 @@ void test_avance_FSM_de_estado_validando_tarjeta_a_estado_ingreso_primer_numero(
     TEST_ASSERT_EQUAL(estado_ingreso_primer_numero, TestState);
 }
 
+void test_avance_FSM_de_estado_estado_ingreso_primer_numero_a_estado_ingreso_segundo_numero(void) {
+    TestState = estado_ingreso_primer_numero;
+    TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
+    TEST_ASSERT_EQUAL(estado_ingreso_segundo_numero, TestState);
+}
+
 // #include "unity.h"
 
 // #include "leds.h"
