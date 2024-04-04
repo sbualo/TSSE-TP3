@@ -213,6 +213,24 @@ void test_avance_FSM_por_timeout_desde_todos_los_estados() {
     TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
 }
 
+void test_funcion_generador_evento_RFID(void) {
+    get_RFID_event_ocurrence_CMockExpectAndReturn(1, true); // Lectura positiva de RFID
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(LECTURA_TARJETA, TestEvent);
+}
+
+// typedef enum {
+//     LECTURA_TARJETA,
+//     TARJETA_VALIDA,
+//     TARJETA_INVALIDA,
+//     LECTURA_NUMERO_TECLADO,
+//     PIN_VALIDO,
+//     PIN_INVALIDO,
+//     TIMEOUT_DEFAULT,
+//     TIMEOUT_PUERTA_ABIERTA,
+//     FIN_TABLA
+// } eventos;
+
 // #include "unity.h"
 
 // #include "leds.h"

@@ -48,7 +48,6 @@ void lectura_primer_numero(void);
 void lectura_segundo_numero(void);
 void lectura_tercer_numero(void);
 void lectura_cuarto_numero(void);
-void validar_pin_numerico(void);
 void abrir_puerta(void);
 void cerrar_puerta(void);
 void reset_FSM(void);

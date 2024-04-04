@@ -126,8 +126,7 @@ void lectura_cuarto_numero(void) {
         pinValido = -1;
     }
 }
-void validar_pin_numerico(void) {
-}
+
 void abrir_puerta(void) {
     LED_OPEN_DOOR();
     NumeroPulsado = -1;
