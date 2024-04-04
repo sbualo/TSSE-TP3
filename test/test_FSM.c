@@ -229,6 +229,17 @@ void test_funcion_generador_evento_numero_teclado(void) {
     TEST_ASSERT_EQUAL(LECTURA_NUMERO_TECLADO, TestEvent);
 }
 
+void test_funcion_generador_evento_numero_teclado_invalido(void) {
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(0);
+    KEYBOARD_ReadData_IgnoreAndReturn(0);      // Se presiona el numero "-1" (lectura defectuosa)
+    test_set_TarjetaValida(0);                 // No evento tarjeta
+    test_set_pinValido(0);                     // No hay evento de pin
+    TIME_GetTimeStatus_IgnoreAndReturn(false); // Evento de timer
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(FIN_TABLA, TestEvent);
+}
+
 void test_funcion_generador_evento_tarjeta_valida(void) {
     get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
     test_set_NumeroPulsado(-1);                      // No hay evento de numeros
