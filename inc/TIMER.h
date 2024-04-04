@@ -9,12 +9,10 @@
 #define API_INC_TIMER_H_
 #include "main.h"
 
-
 typedef enum {
-  TIMER_TIMEOUT
-  //TIMER_DOOR_OPENED
+    TIMER_TIMEOUT
+    // TIMER_DOOR_OPENED
 } TIMERS;
-
 
 void TIM10_Init(void);
 

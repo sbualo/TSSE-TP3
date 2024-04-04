@@ -12,30 +12,29 @@
 
 /*Listado de Eventos*/
 typedef enum {
-  LECTURA_TARJETA,
-  TARJETA_VALIDA,
-  TARJETA_INVALIDA,
-  LECTURA_NUMERO_TECLADO,
-  PIN_VALIDO,
-  PIN_INVALIDO,
-  TIMEOUT_DEFAULT,
-  TIMEOUT_PUERTA_ABIERTA,
-  FIN_TABLA
+    LECTURA_TARJETA,
+    TARJETA_VALIDA,
+    TARJETA_INVALIDA,
+    LECTURA_NUMERO_TECLADO,
+    PIN_VALIDO,
+    PIN_INVALIDO,
+    TIMEOUT_DEFAULT,
+    TIMEOUT_PUERTA_ABIERTA,
+    FIN_TABLA
 } eventos;
 
 typedef struct state_diagram_edge STATE;
 
+struct state_diagram_edge {
 
-struct state_diagram_edge{
-
-	eventos evento;
-	STATE * proximo_estado;
-	void(*p_rutina_accion)(void);
+    eventos evento;
+    STATE * proximo_estado;
+    void (*p_rutina_accion)(void);
 };
 
 /*Interprete de la maquina de estados*/
-STATE* fsm( STATE *p_tabla_estado , eventos evento_actual);
-STATE* FSM_GetInitState(void);
+STATE * fsm(STATE * p_tabla_estado, eventos evento_actual);
+STATE * FSM_GetInitState(void);
 
 /*Generador de eventos*/
 
@@ -49,7 +48,6 @@ void lectura_primer_numero(void);
 void lectura_segundo_numero(void);
 void lectura_tercer_numero(void);
 void lectura_cuarto_numero(void);
-void validar_pin_numerico(void);
 void abrir_puerta(void);
 void cerrar_puerta(void);
 void reset_FSM(void);
@@ -64,5 +62,8 @@ extern STATE estado_ingreso_cuarto_numero[];
 extern STATE estado_validando_pin[];
 extern STATE estado_puerta_abierta[];
 
+void test_set_NumeroPulsado(char value);
+void test_set_TarjetaValida(int value);
+void test_set_pinValido(int value);
 
 #endif /* API_INC_FSM_H_ */
