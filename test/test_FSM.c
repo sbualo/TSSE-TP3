@@ -150,9 +150,16 @@ void test_avance_FSM_de_estado_estado_ingreso_cuarto_numero_a_estado_validando_p
 
 void test_avance_FSM_de_estado_estado_validando_pin_a_estado_puerta_abierta(void) {
     TestState = estado_validando_pin;
+    LED_OPEN_DOOR_Ignore();
     TestState = fsm(TestState,
                     PIN_VALIDO); // Con este evento la FSM avanza a ingreso_primer_numero
     TEST_ASSERT_EQUAL(estado_puerta_abierta, TestState);
+}
+void test_avance_FSM_de_estado_estado_validando_pin_a_estado_ingreso_primer_numero(void) {
+    TestState = estado_validando_pin;
+    TestState = fsm(TestState,
+                    PIN_INVALIDO); // Con este evento la FSM avanza a ingreso_primer_numero
+    TEST_ASSERT_EQUAL(estado_ingreso_primer_numero, TestState);
 }
 
 // #include "unity.h"
