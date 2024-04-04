@@ -46,11 +46,11 @@ eventos get_event(void) {
     }
 
     if (NumeroPulsado == 0) {
-        uint8_t pulsedNumber = KEYBOARD_ReadData();
+        int pulsedNumber = KEYBOARD_ReadData();
         if (pulsedNumber > 0) {
             LED_KeyboardPress();
             // HAL_Delay(500);
-            NumeroPulsado = pulsedNumber;
+            NumeroPulsado = (uint8_t)pulsedNumber;
             return LECTURA_NUMERO_TECLADO;
         }
     }
