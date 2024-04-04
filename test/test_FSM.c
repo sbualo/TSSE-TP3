@@ -17,6 +17,7 @@ unsigned char test_id_tarjeta_valido[5] = "CARD";
  *
  */
 void setUp(void) {
+    TIMER_Start_CMockIgnore();
 }
 
 void test_inicializacion_FSM_puerta_cerrada(void) {
