@@ -14,12 +14,12 @@ STATE * TestState;
  * @brief Funcion que se ejecuta antes de cada test (nombre especifico de ceedling)
  *
  */
-// void setUp(void) {
-//    TestState =  FSM_GetInitState();
-// }
+void setUp(void) {
+   TestState =  FSM_GetInitState();
+}
 
 void test_inicializacion_FSM_puerta_cerrada(void) {
-    TestState = estado_validando_tarjeta;
+    
     TEST_ASSERT_EQUAL_UINT16(estado_puerta_cerrada, TestState);
 }
 
