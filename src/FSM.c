@@ -7,6 +7,7 @@
 
 #include "FSM.h"
 #include "FSM_Table.h"
+#include <stdint.h>
 #include "RC522.h"
 #include "TTP229.h"
 #include "USERS_DATA.h"
@@ -16,6 +17,7 @@
 static int tarjetavalida=0;
 static uint8_t NumeroPulsado = -1;
 static int pinValido = 0;
+
 
 STATE* FSM_GetInitState(void){
 
@@ -46,7 +48,7 @@ eventos get_event(void){
 	uint8_t pulsedNumber = KEYBOARD_ReadData();
 	if (pulsedNumber>0){
 			LED_KeyboardPress();
-			HAL_Delay(500);
+			//HAL_Delay(500);
 			NumeroPulsado = pulsedNumber;
 			return LECTURA_NUMERO_TECLADO;
 		}
