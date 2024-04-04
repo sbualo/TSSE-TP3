@@ -148,3 +148,7 @@ void test_set_NumeroPulsado(char value) {
 void test_set_TarjetaValida(int value) {
     tarjetavalida = value;
 }
+
+void test_set_pinValido(int value) {
+    pinValido = value;
+}

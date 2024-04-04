@@ -64,5 +64,6 @@ extern STATE estado_puerta_abierta[];
 
 void test_set_NumeroPulsado(char value);
 void test_set_TarjetaValida(int value);
+void test_set_pinValido(int value);
 
 #endif /* API_INC_FSM_H_ */
