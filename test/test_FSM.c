@@ -166,9 +166,34 @@ void test_avance_FSM_por_timeout_desde_todos_los_estados() {
 
     TestState = estado_puerta_abierta;
     LED_OPEN_DOOR_Ignore();
-    TestState = fsm(TestState,
-                    TIMEOUT_DEFAULT); // Con este evento la FSM avanza a ingreso_primer_numero
-    TEST_ASSERT_EQUAL(estado_ingreso_primer_numero, TestState);
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_puerta_cerrada;
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TestState = estado_validando_tarjeta;
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_primer_numero;
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_segundo_numero;
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_tercer_numero;
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_ingreso_cuarto_numero;
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
+
+    TestState = estado_validando_pin;
+    TestState = fsm(TestState, TIMEOUT_DEFAULT);
+    TEST_ASSERT_EQUAL(estado_puerta_cerrada, TestState);
 }
 
 // #include "unity.h"
