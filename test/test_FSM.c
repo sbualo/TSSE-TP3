@@ -22,6 +22,7 @@ unsigned char test_id_tarjeta_valido[5] = "CARD";
 void setUp(void) {
     TIMER_Start_CMockIgnore();
     LED_KeyboardPress_Ignore(); // Se ignora la funcion que prende los leds
+    LED_Card_Blink_Ignore();    // Se ignora la funcion que parpadea leds cuando se lee una tarjeta
 }
 
 void test_inicializacion_FSM_puerta_cerrada(void) {
@@ -229,9 +230,9 @@ void test_funcion_generador_evento_numero_teclado(void) {
 void test_funcion_generador_evento_tarjeta_valida(void) {
     get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
     test_set_NumeroPulsado(-1);                              // No hay evento de numeros
-
+    test_set_TarjetaValida(1);                               // Lectura tarjeta válida
     eventos TestEvent = get_event();
-    TEST_ASSERT_EQUAL(LECTURA_NUMERO_TECLADO, TestEvent);
+    TEST_ASSERT_EQUAL(TARJETA_VALIDA, TestEvent);
 }
 // typedef enum {
 //     LECTURA_TARJETA,
