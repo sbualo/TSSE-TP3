@@ -9,6 +9,7 @@
 #include "FSM.h"
 
 #define TEST_NUMERO_PULSADO_DEFAULT 255U
+#define TEST_NUMERO_PULSADO_EN_USO  0
 
 STATE * TestState;
 
@@ -122,9 +123,18 @@ void test_avance_FSM_de_estado_estado_ingreso_segundo_numero_a_estado_ingreso_te
     uint8_t NumeroPulsado = 0;
     USERS_DATA_COLLECT_SECOND_NUMBER_CMockExpect(1, &NumeroPulsado);
     TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
+    TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_EN_USO, NumeroPulsado);
     TEST_ASSERT_EQUAL(estado_ingreso_tercer_numero, TestState);
 }
 
+void test_avance_FSM_de_estado_estado_ingreso_tercer_numero_a_estado_ingreso_cuarto_numero(void) {
+    TestState = estado_ingreso_tercer_numero;
+    uint8_t NumeroPulsado = 0;
+    USERS_DATA_COLLECT_THIRD_NUMBER_CMockExpect(1, &NumeroPulsado);
+    TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
+    TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_EN_USO, NumeroPulsado);
+    TEST_ASSERT_EQUAL(estado_ingreso_cuarto_numero, TestState);
+}
 // #include "unity.h"
 
 // #include "leds.h"
