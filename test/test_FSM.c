@@ -8,6 +8,8 @@
 #include "mock_SPI.h"
 #include "FSM.h"
 
+#define TEST_NUMERO_PULSADO_DEFAULT 255U
+
 STATE * TestState;
 
 unsigned char test_id_tarjeta_valido[5] = "CARD";
@@ -107,8 +109,22 @@ void test_avance_FSM_de_estado_validando_tarjeta_a_estado_ingreso_primer_numero(
 
 void test_avance_FSM_de_estado_estado_ingreso_primer_numero_a_estado_ingreso_segundo_numero(void) {
     TestState = estado_ingreso_primer_numero;
+    uint8_t NumeroPulsado = TEST_NUMERO_PULSADO_DEFAULT;
+    USERS_DATA_COLLECT_FIRST_NUMBER_CMockExpect(1, &NumeroPulsado);
+    LED_KeyboardPress_Ignore(); // Se ignora la funcion que prende los leds
     TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
+    TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_DEFAULT, NumeroPulsado);
     TEST_ASSERT_EQUAL(estado_ingreso_segundo_numero, TestState);
+}
+
+void test_avance_FSM_de_estado_estado_ingreso_segundo_numero_a_estado_ingreso_tercer_numero(void) {
+    TestState = estado_ingreso_segundo_numero;
+    uint8_t NumeroPulsado = -1;
+    USERS_DATA_COLLECT_FIRST_NUMBER_CMockExpect(1, &NumeroPulsado);
+    LED_KeyboardPress_Ignore(); // Se ignora la funcion que prende los leds
+    TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
+    TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_DEFAULT, NumeroPulsado);
+    TEST_ASSERT_EQUAL(estado_ingreso_tercer_numero, TestState);
 }
 
 // #include "unity.h"
