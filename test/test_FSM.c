@@ -26,7 +26,7 @@ void test_inicializacion_FSM_puerta_cerrada(void) {
 }
 
 void test_validar_id_tarjeta_FSM(void){
-    unsigned char * tarjeta_leida = "ABCD";
+    unsigned char * tarjeta_leida = "CARD";
     GetKeyRead_CMockIgnoreAndReturn(1,tarjeta_leida);
     USERS_DATA_VALIDATE_KEYCARD_CMockExpectAndReturn(1,test_id_tarjeta_valido,1);
     validar_id_tarjeta();
