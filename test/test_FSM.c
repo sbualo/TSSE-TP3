@@ -32,7 +32,13 @@ void test_inicializacion_FSM_puerta_cerrada(void) {
 void test_validar_id_tarjeta_FSM(void) {
     unsigned char tarjeta_leida[5] = "CARD";
     GetKeyRead_CMockIgnoreAndReturn(1, tarjeta_leida);
-    USERS_DATA_VALIDATE_KEYCARD_CMockExpectAndReturn(1, test_id_tarjeta_valido, 1);
+    USERS_DATA_VALIDATE_KEYCARD_CMockExpectAndReturn(1, test_id_tarjeta_valido, true);
+    validar_id_tarjeta();
+}
+void test_id_tarjeta_incorrecta_FSM(void) {
+    unsigned char tarjeta_leida[5] = "ACME";
+    GetKeyRead_CMockIgnoreAndReturn(1, tarjeta_leida);
+    USERS_DATA_VALIDATE_KEYCARD_CMockExpectAndReturn(1, tarjeta_leida, false);
     validar_id_tarjeta();
 }
 
@@ -143,6 +149,17 @@ void test_avance_FSM_de_estado_estado_ingreso_cuarto_numero_a_estado_validando_p
 
     USERS_DATA_VALIDATE_PIN_CMockExpectAndReturn(
         1, true); // Se asume siempre un pin válido aunque no afeca este test
+    TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
+    TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_EN_USO, NumeroPulsado);
+    TEST_ASSERT_EQUAL(estado_validando_pin, TestState);
+}
+
+void test_estado_ingreso_pin_incorrecto(void) {
+    TestState = estado_ingreso_cuarto_numero;
+    uint8_t NumeroPulsado = 0;
+    USERS_DATA_COLLECT_FOURTH_NUMBER_CMockExpect(1, &NumeroPulsado);
+
+    USERS_DATA_VALIDATE_PIN_CMockExpectAndReturn(1, false); // el pin en este caso es incorrecto
     TestState = fsm(TestState, LECTURA_NUMERO_TECLADO);
     TEST_ASSERT_EQUAL(TEST_NUMERO_PULSADO_EN_USO, NumeroPulsado);
     TEST_ASSERT_EQUAL(estado_validando_pin, TestState);
