@@ -222,7 +222,7 @@ void test_funcion_generador_evento_RFID(void) {
     TEST_ASSERT_EQUAL(LECTURA_TARJETA, TestEvent);
 }
 void test_funcion_generador_evento_numero_teclado(void) {
-    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
     test_set_NumeroPulsado(0);
     KEYBOARD_ReadData_CMockExpectAndReturn(1, 5); // Se presiona el numero 5
     eventos TestEvent = get_event();
@@ -230,37 +230,48 @@ void test_funcion_generador_evento_numero_teclado(void) {
 }
 
 void test_funcion_generador_evento_tarjeta_valida(void) {
-    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
-    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
-    test_set_TarjetaValida(1);                               // Lectura tarjeta válida
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                      // No hay evento de numeros
+    test_set_TarjetaValida(1);                       // Lectura tarjeta válida
     eventos TestEvent = get_event();
     TEST_ASSERT_EQUAL(TARJETA_VALIDA, TestEvent);
 }
 
 void test_funcion_generador_evento_tarjeta_invalida(void) {
-    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
-    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
-    test_set_TarjetaValida(-1);                              // Lectura tarjeta inválida
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                      // No hay evento de numeros
+    test_set_TarjetaValida(-1);                      // Lectura tarjeta inválida
     eventos TestEvent = get_event();
     TEST_ASSERT_EQUAL(TARJETA_INVALIDA, TestEvent);
 }
 
 void test_funcion_generador_evento_pin_valido(void) {
-    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
-    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
-    test_set_TarjetaValida(0);                               // No evento tarjeta
-    test_set_pinValido(1);                                   // El pin ingresado es correcto
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                      // No hay evento de numeros
+    test_set_TarjetaValida(0);                       // No evento tarjeta
+    test_set_pinValido(1);                           // El pin ingresado es correcto
     eventos TestEvent = get_event();
     TEST_ASSERT_EQUAL(PIN_VALIDO, TestEvent);
 }
 
 void test_funcion_generador_evento_pin_invalida(void) {
-    get_RFID_event_ocurrence_CMockExpectAndReturn(1, false); // Lectura negativa de RFID
-    test_set_NumeroPulsado(-1);                              // No hay evento de numeros
-    test_set_TarjetaValida(0);                               // No evento tarjeta
-    test_set_pinValido(-1);                                  // El pin ingresado es incorrecto
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                      // No hay evento de numeros
+    test_set_TarjetaValida(0);                       // No evento tarjeta
+    test_set_pinValido(-1);                          // El pin ingresado es incorrecto
     eventos TestEvent = get_event();
     TEST_ASSERT_EQUAL(PIN_INVALIDO, TestEvent);
+}
+
+void test_funcion_generador_evento_timer(void) {
+    get_RFID_event_ocurrence_IgnoreAndReturn(false); // Lectura negativa de RFID
+    test_set_NumeroPulsado(-1);                      // No hay evento de numeros
+    test_set_TarjetaValida(0);                       // No evento tarjeta
+    test_set_pinValido(0);                           // El pin ingresado es incorrecto
+    TIME_GetTimeStatus_IgnoreAndReturn(true);        // Evento de timer
+    TIME_ResetTimeStatus_Ignore();
+    eventos TestEvent = get_event();
+    TEST_ASSERT_EQUAL(TIMEOUT_DEFAULT, TestEvent);
 }
 
 // typedef enum {
